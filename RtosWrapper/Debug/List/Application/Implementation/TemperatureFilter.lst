@@ -1,0 +1,222 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V9.30.1.335/W64 for ARM         20/Jun/2025  22:26:52
+# Copyright 1999-2022 IAR Systems AB.
+#
+#    Cpu mode           =  thumb
+#    Endian             =  little
+#    Source file        =
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\TemperatureFilter.cpp
+#    Command line       =
+#        -f
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\Obj\Application\Implementation\TemperatureFilter.o.rsp
+#        (D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\TemperatureFilter.cpp
+#        -lC
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\List\Application\Implementation
+#        -lA
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\List\Application\Implementation
+#        -o
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\Obj\Application\Implementation
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\arm\inc\c\DLib_Config_Normal.h" -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\wrapper\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\wrapper\FreeRtos\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\include\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\portable\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\portable\Common\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\portable\IAR\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\portable\IAR\ARM_CM4F\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Rtos\FreeRtos\portable\MemMang\
+#        -I D:\RtosWrapper\minor-labs\repo\RtosWrapper\MyTasks\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Common\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\CMSIS\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Diagnostic\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\AHardware\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\AHardware\GpioPort\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\AHardware\IrqController\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Pin\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Registers\STM32F411\FieldValues\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Registers\STM32F411\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Registers\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Port\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\AbstractHardware\Atomic\
+#        -I D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\Common\ -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\Common\Singleton\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\..\CortexLib\Common\RomObject\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\
+#        -I D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Contracts\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\Modes\
+#        -I
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\
+#        -Ol --c++ --no_exceptions --no_rtti) --dependencies=n
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\Obj\Application\Implementation\TemperatureFilter.o.d
+#    Locale             =  C
+#    List file          =
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\List\Application\Implementation\TemperatureFilter.lst
+#    Object file        =
+#        D:\RtosWrapper\minor-labs\repo\RtosWrapper\Debug\Obj\Application\Implementation\TemperatureFilter.o
+#    Runtime model:        
+#      __CPP_Exceptions =  Disabled
+#      __CPP_Language   =  C++14
+#      __CPP_Library    =  DLib
+#      __CPP_Runtime    =  1
+#      __SystemLibrary  =  DLib
+#
+###############################################################################
+
+D:\RtosWrapper\minor-labs\repo\RtosWrapper\Application\Implementation\TemperatureFilter.cpp
+      1          #include "TemperatureFilter.h"
+
+   \                                 In section .text, align 2
+   \   __vfp IFilter::subobject IFilter() noexcept
+   \                     _ZN7IFilterC2Ev: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+   \        0x2   0x.... 0x....      BL       _ZN7IFilterC1Ev
+   \        0x6   0xBD02             POP      {R1,PC}
+
+   \                                 In section .text, align 2
+   \   __vfp IFilter::IFilter() noexcept
+   \                     _ZN7IFilterC1Ev: (+1)
+   \        0x0   0x4770             BX       LR
+      2          
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __vfp TemperatureFilter::subobject TemperatureFilter()
+   \                     _ZN17TemperatureFilterC2Ev: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+   \        0x2   0x.... 0x....      BL       _ZN17TemperatureFilterC1Ev
+   \        0x6   0xBD02             POP      {R1,PC}
+
+   \                                 In section .text, align 2, keep-with-next
+      3          TemperatureFilter::TemperatureFilter()
+      4              : buffer{}, index(0), count(0)
+      5          {
+   \                     _ZN17TemperatureFilterC1Ev: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+   \        0x2   0x0004             MOVS     R4,R0
+   \        0x4   0x0020             MOVS     R0,R4
+   \        0x6   0x.... 0x....      BL       _ZN7IFilterC2Ev
+   \        0xA   0x....             LDR.N    R0,??DataTable2_1
+   \        0xC   0x6020             STR      R0,[R4, #+0]
+   \        0xE   0x1D20             ADDS     R0,R4,#+4
+   \       0x10   0x2128             MOVS     R1,#+40
+   \       0x12   0x.... 0x....      BL       __aeabi_memclr4
+   \       0x16   0x2000             MOVS     R0,#+0
+   \       0x18   0x62E0             STR      R0,[R4, #+44]
+   \       0x1A   0x2000             MOVS     R0,#+0
+   \       0x1C   0x6320             STR      R0,[R4, #+48]
+      6          }
+   \       0x1E   0x0020             MOVS     R0,R4
+   \       0x20   0xBD10             POP      {R4,PC}
+      7          
+
+   \                                 In section .text, align 4, keep-with-next
+      8          float TemperatureFilter::FilterValue(float value)
+      9          {
+     10              buffer[index] = value;
+   \                     _ZN17TemperatureFilter11FilterValueEf: (+1)
+   \        0x0   0x6AC1             LDR      R1,[R0, #+44]
+   \        0x2   0xEB00 0x0181      ADD      R1,R0,R1, LSL #+2
+   \        0x6   0xED81 0x0A01      VSTR     S0,[R1, #+4]
+     11              index = (index + 1) % windowSize;
+   \        0xA   0x6AC1             LDR      R1,[R0, #+44]
+   \        0xC   0x1C49             ADDS     R1,R1,#+1
+   \        0xE   0x220A             MOVS     R2,#+10
+   \       0x10   0xFB91 0xF3F2      SDIV     R3,R1,R2
+   \       0x14   0xFB02 0x1113      MLS      R1,R2,R3,R1
+   \       0x18   0x62C1             STR      R1,[R0, #+44]
+     12              if (count < windowSize) ++count;
+   \       0x1A   0x6B01             LDR      R1,[R0, #+48]
+   \       0x1C   0x290A             CMP      R1,#+10
+   \       0x1E   0xDA02             BGE.N    ??FilterValue_0
+   \       0x20   0x6B01             LDR      R1,[R0, #+48]
+   \       0x22   0x1C49             ADDS     R1,R1,#+1
+   \       0x24   0x6301             STR      R1,[R0, #+48]
+     13          
+     14              float sum = 0.0f;
+   \                     ??FilterValue_0: (+1)
+   \       0x26   0xED9F 0x....      VLDR.W   S0,??DataTable2
+     15              for (int i = 0; i < count; ++i)
+   \       0x2A   0x2100             MOVS     R1,#+0
+   \       0x2C   0xE006             B.N      ??FilterValue_1
+     16              {
+     17                  sum += buffer[i];
+   \                     ??FilterValue_2: (+1)
+   \       0x2E   0xEB00 0x0281      ADD      R2,R0,R1, LSL #+2
+   \       0x32   0xEDD2 0x0A01      VLDR     S1,[R2, #+4]
+   \       0x36   0xEE30 0x0A20      VADD.F32 S0,S0,S1
+     18              }
+   \       0x3A   0x1C49             ADDS     R1,R1,#+1
+   \                     ??FilterValue_1: (+1)
+   \       0x3C   0x6B02             LDR      R2,[R0, #+48]
+   \       0x3E   0x4291             CMP      R1,R2
+   \       0x40   0xDBF5             BLT.N    ??FilterValue_2
+     19          
+     20              return sum / count;
+   \       0x42   0xEDD0 0x0A0C      VLDR     S1,[R0, #+48]
+   \       0x46   0xEEF8 0x0AE0      VCVT.F32.S32 S1,S1
+   \       0x4A   0xEE80 0x0A20      VDIV.F32 S0,S0,S1
+   \       0x4E   0x4770             BX       LR
+     21          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \        0x0   0x0000'0000        DC32     0x0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_1:
+   \        0x0   0x....'....        DC32     _ZTV17TemperatureFilter+0x8
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   IFilter::IFilter() noexcept
+       8   IFilter::subobject IFilter() noexcept
+         8   -> IFilter::IFilter() noexcept
+       0   TemperatureFilter::FilterValue(float)
+       8   TemperatureFilter::TemperatureFilter()
+         8   -> IFilter::subobject IFilter() noexcept
+         8   -> __aeabi_memclr4
+       8   TemperatureFilter::subobject TemperatureFilter()
+         8   -> TemperatureFilter::TemperatureFilter()
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       2  IFilter::IFilter() noexcept
+       8  IFilter::subobject IFilter() noexcept
+      80  TemperatureFilter::FilterValue(float)
+      34  TemperatureFilter::TemperatureFilter()
+       8  TemperatureFilter::subobject TemperatureFilter()
+     104  -- Other
+
+ 
+ 104 bytes in section .rodata
+ 140 bytes in section .text
+ 
+ 130 bytes of CODE  memory (+ 10 bytes shared)
+  40 bytes of CONST memory (+ 64 bytes shared)
+
+Errors: none
+Warnings: none
