@@ -26,25 +26,31 @@ FreeRTOS — операционная система реального врем
 == Работа с задачами
 
 === Создание задач
-Используется обертка `oRTOS.createTask` для создания задач. Пример:
+Используется RtosWrapper (обертка для конкретной RTOS) должен вызывать приватный метод Run для старта потока. Пример:
 [source,c]
 ----
-TaskHandle_t xTaskHandle;
-oRTOS.createTask(
-    vTaskFunction,  // Функция задачи
-    "TaskName",     // Идентификатор
-    128,            // Размер стека
-    NULL,           // Параметры
-    1,              // Приоритет
-    &xTaskHandle    // Указатель на дескриптор
-);
+friend class RtosWrapper;    
+
+  private:
+    //cstat !MISRAC++2008-7-1-2 To prevent reinterpret_cast in the CreateTask
+    __forceinline static void Run(void *pContext)
+    {
+      static_cast<IThread*>(pContext)->Run();
+    }
 ----
 
 === Управление задержками
-Метод `oRTOS.delayTask` приостанавливает задачу на указанное время (в тиках):
-[source,c]
+В реализации RtosWrapper::wHandleSysTickInterrupt может вестись подсчёт тиков, что позволяет реализовать:
+
+* Функции задержки (vTaskDelay в FreeRTOS).
+
+* Учёт времени выполнения потоков.
+
+* Таймеры ОС
 ----
-oRTOS.delayTask(pdMS_TO_TICKS(100)); // Задержка 100 мс
+__forceinline static void HandleSysTickInterrupt() {
+  RtosWrapper::wHandleSysTickInterrupt();
+}
 ----
 
 == Межзадачная коммуникация
