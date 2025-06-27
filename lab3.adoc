@@ -99,5 +99,116 @@ include::test.adoc[]
    - Определить причину прерывания
    - Обработать данные от устройства
    - Сбросить флаг прерывания
+== Пример
+[source,cpp]
+----
+#ifndef INTERRUPTENTRY_HPP  
+#define INTERRUPTENTRY_HPP  
 
+namespace OsWrapper  
+{
+  // Объявления внешних функций для работы с прерываниями
+  extern void wEnterInterrupt();  // Функция входа в прерывание 
+  extern void wLeaveInterrupt();  // Функция выхода из прерывания 
+  
+  // Класс-обертка для автоматического управления состоянием прерывания
+  class InterruptEntry
+  {
+    public:
+      // Конструктор - вызывается при создании объекта
+      inline InterruptEntry()  // inline для оптимизации
+      {
+        wEnterInterrupt();  // Вызываем функцию входа в прерывание
+      }	  
+      
+      // Деструктор - вызывается при уничтожении объекта
+      inline ~InterruptEntry()  // inline для оптимизации
+      {
+        wLeaveInterrupt();  // Вызываем функцию выхода из прерывания
+      }
+  };
+} ;
 
+#endif // INTERRUPTENTRY_HPP  
+----
+
+[source,cpp]
+----
+
+#pragma language = extended
+#pragma segment = "CSTACK"
+#include "Rtos/wrapper/rtos.hpp"  
+
+// Объявления внешних функций
+extern "C" void __iar_program_start(void);  
+extern "C" void xPortPendSVHandler(void);   
+// Пустой модуль-заглушка для обработчиков прерываний
+class DummyModule
+{
+public:
+    static void handler();  // Статический метод-заглушка
+};
+
+// Тип для указателя на функцию-обработчик прерывания
+using tIntFunct = void(*)();
+// Объединение для элементов вектора прерываний (может содержать указатель на функцию или void*)
+using tIntVectItem = union {tIntFunct __fun; void* __ptr;};
+
+#pragma location = ".intvec"  // Размещение таблицы в секции .intvec
+
+extern "C" const tIntVectItem __vector_table[] =
+{
+    // Первые два элемента - указатель на вершину стека и адрес точки входа
+    { .__ptr = __sfe("CSTACK") },  // Указатель на конец стека (Stack Pointer инициализация)
+    __iar_program_start,            // Точка входа в программу (Reset Handler)
+
+    // Далее следуют обработчики исключений и прерываний:
+    DummyModule::handler,  // NMI
+    DummyModule::handler,  // HardFault
+    DummyModule::handler,  // MemManage
+    DummyModule::handler,  // BusFault
+    DummyModule::handler,  // UsageFault
+    0,                     // Reserved
+    0,                     // Reserved
+    0,                     // Reserved
+    0,                     // Reserved
+    OsWrapper::Rtos::HandleSvcInterrupt,  // SVCall
+    DummyModule::handler,  // Debug Monitor
+    0,                     // Reserved
+    xPortPendSVHandler,    // PendSV (используется FreeRTOS)
+    OsWrapper::Rtos::HandleSysTickInterrupt,  // SysTick (используется RTOS)
+    
+    // Внешние прерывания (IRQ)
+    DummyModule::handler,  // Window Watchdog
+    DummyModule::handler,  // PVD через EXTI Line detect/EXTI16
+    // ... (продолжение таблицы прерываний)
+    // Многие прерывания инициализированы заглушкой DummyModule::handler
+    // Некоторые - 0 (неиспользуемые прерывания)
+    // Некоторые - специфичные обработчики (USB, DMA и т.д.)
+};
+
+// Реализация метода-заглушки (бесконечный цикл)
+void DummyModule::handler() { for(;;) {} }
+
+// Объявления функций инициализации
+extern "C" void __cmain(void);            // Основная функция инициализации C
+extern "C" __weak void __iar_init_core(void);  // Слабая ссылка на инициализацию ядра
+extern "C" __weak void __iar_init_vfp(void);   // Слабая ссылка на инициализацию FPU
+
+// Указание компилятору, что таблица векторов должна быть включена в выходной файл
+#pragma required=__vector_table
+
+// Точка входа в программу (вызывается после сброса)
+void __iar_program_start(void)
+{
+    __iar_init_core();  // Инициализация ядра процессора
+    __iar_init_vfp();   // Инициализация блока FPU (если есть)
+    __cmain();          // Вызов основной функции инициализации C
+}
+----
+== Выводы
+
+* Прерывания позволяют микроконтроллеру **мгновенно реагировать** на внешние и внутренние события.
+* NVIC управляет приоритетами и запуском соответствующих обработчиков.
+* ISR (обработчики) должен быть **быстрым и минимальным**, без тяжёлых операций.
+* Таблица векторов — это карта, по которой NVIC находит нужную функцию.
