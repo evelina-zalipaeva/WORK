@@ -1,0 +1,78 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+' ===== Классы и интерфейсы =====
+class Led {
+    Led(address: int, pinNumber: int)
+    void TurnOn()
+    void TurnOff()
+    void Toggle()
+}
+
+interface IToggable {
+    void Toggle()
+}
+
+interface ISwitcher {
+    void TurnOn()
+    void TurnOff()
+}
+
+class TreeMode {
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+class ChessMode {
+    int mActiveLEDid
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+class AllMode {
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+interface IMode {
+    void Execute()
+}
+
+class ModeManager {
+    Modes(modes[]: IMode)
+    void SetNextMode()
+    void Update()
+}
+
+interface IModeManager {
+    void SetNextMode()
+    void Update()
+}
+
+class Button {
+    void IsPressed()
+}
+
+interface IButton {
+    void IsPressed()
+}
+
+' ===== Структура связей =====
+Led -up-|> IToggable
+Led -up-|> ISwitcher
+Led --o TreeMode
+Led --o ChessMode
+Led --o AllMode
+
+TreeMode --|> IMode
+ChessMode --|> IMode
+AllMode --|> IMode
+
+IMode --o ModeManager
+
+ModeManager --|> IModeManager
+
+Button --|> IButton
+@enduml
