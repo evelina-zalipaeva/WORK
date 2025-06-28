@@ -60,32 +60,22 @@ interface IButton {
 }
 
 ' ===== Структура связей =====
-Led --> IToggable
-Led --> ISwitcher
-Led --> TreeMode
-Led --> ChessMode
-Led --> AllMode
+Led -up-|> IToggable
+Led -up-|> ISwitcher
+Led --o TreeMode
+Led --o ChessMode
+Led --o AllMode
 
-TreeMode --> IMode
-ChessMode --> IMode
-AllMode --> IMode
+TreeMode --|> IMode
+ChessMode --|> IMode
+AllMode --|> IMode
 
-IMode --> ModeManager
+IMode --o ModeManager
 
-ModeManager --> IModeManager
+ModeManager --|> IModeManager
 
-Button --> IButton
+Button --|> IButton
 
-' ===== Расположение =====
-Led -[hidden]-> IToggable
-IToggable -[hidden]-> ISwitcher
-ISwitcher -[hidden]-> TreeMode
-TreeMode -[hidden]-> ChessMode
-ChessMode -[hidden]-> AllMode
-AllMode -[hidden]-> IMode
-IMode -[hidden]-> ModeManager
-ModeManager -[hidden]-> IModeManager
-ModeManager -[hidden]-> Button
-Button -[hidden]-> IButton
+
 
 @enduml
